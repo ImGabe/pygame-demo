@@ -112,7 +112,6 @@ class Game:
 
     def on_cleanup(self):
         pygame.quit()
-        sys.exit()
 
     def on_execute(self):
         if self.on_init() is False:
