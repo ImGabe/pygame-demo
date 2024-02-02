@@ -1,4 +1,3 @@
-import sys
 import pygame
 
 from colors import RED, BLACK
@@ -61,8 +60,8 @@ class Game:
             if event.key == pygame.K_ESCAPE:
                 self.running = False
 
-            if event.key == pygame.K_p:
-                self.pause = not self.pause
+            if event.key == pygame.K_RETURN and self.pause:
+                self.on_restart()
 
         if event.type == pygame.QUIT:
             self.running = False
@@ -77,7 +76,7 @@ class Game:
 
         for _ in blocks_hit_list:
             self.sound_manager.collision()
-            self.on_restart()
+            self.pause = True
 
     def on_render(self):
         # fill the screen with black
@@ -102,6 +101,8 @@ class Game:
         self.dt = self.clock.tick(self.fps) / 1000
 
     def on_restart(self):
+        self.pause = False
+
         self.all_sprite.empty()
         self.obstacles.empty()
 
