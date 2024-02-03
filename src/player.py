@@ -1,16 +1,13 @@
 import pygame
 
 from constant import HEIGHT, WIDTH
-from colors import WHITE
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pygame.Surface((32, 32))
-        self.image.fill(WHITE)
-
+        self.image = pygame.image.load("assets/Cars/sedan.png")
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH // 2, HEIGHT // 2)
 
@@ -20,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if self.rect is None:
-            raise ValueError('For some reason the rect not exist')
+            raise ValueError("For some reason the rect not exist")
 
         if keys[pygame.K_UP] and self.rect.top > 0:
             self.rect.y -= self.speed * dt
@@ -30,6 +27,6 @@ class Player(pygame.sprite.Sprite):
 
     def restart(self):
         if self.rect is None:
-            raise ValueError('For some reason the rect not exist')
+            raise ValueError("For some reason the rect not exist")
 
         self.rect.center = (WIDTH // 2, HEIGHT // 2)
